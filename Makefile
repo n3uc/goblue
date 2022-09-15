@@ -43,7 +43,7 @@ build:
 	go build -ldflags="-X 'main.Version=$(VER)' -X 'main.GitCommit=$(CI_COMMIT_SHA)' -X 'main.BuildTime=$$(date)'" -buildvcs=false -tags netgo -o bin ./...
 
 oci: build
-	$(CONENG) build . --tag $(IMG_REPO):latest --tag ${IMG_REPO}:$(VER)
+	$(CONENG) build --squash . --tag $(IMG_REPO):latest --tag ${IMG_REPO}:$(VER)
 
 clean:
 	@rm -rf bin

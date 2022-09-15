@@ -5,6 +5,7 @@ WORKDIR /go/src/goblue
 COPY . .
 RUN go get -d -v ./...
 RUN make
+RUN strip bin/goblue
 
 # Create the container,  will contain a sample file in /data, normal use would be to volume mount over /data
 #
