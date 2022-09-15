@@ -24,6 +24,9 @@ spec:
       - name: goblue
         image: "{{ .Values.image }}:{{ .Chart.AppVersion }}"
 
+        command: ["/goblue"]
+        args: ["-p", "{{ .Values.listenport }}", "-d", "/data"]
+
         ports:
         - containerPort: {{ .Values.listenport }}
           
