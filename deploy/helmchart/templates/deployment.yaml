@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}      
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      namespace: {{ .Release.Namespace }}      
+      labels:
+        app: {{ .Release.Name }}
+
+    spec:
+      imagePullSecrets:
+        - name: regcred
+ 
+      containers:
+      - name: goblue
+        image: "{{ .Values.image }}:{{ .Chart.AppVersion }}"
+
+        ports:
+        - containerPort: {{ .Values.listenport }}
+          
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: IMAGE
+          value: "{{ .Values.image }}:{{ .Chart.AppVersion }}"
+        - name: VERSION
+          value: {{ .Chart.AppVersion }}

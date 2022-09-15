@@ -52,4 +52,7 @@ push: oci
 	$(CONENG) push $(IMG_REPO) 
 	$(CONENG) push $(IMG_REPO):$(VER)
 
-all: clean push
+helmchart: 
+	helm package deploy/helmchart -d bin --app-version $(VER) --version $(VER)
+
+all: clean push helmchart

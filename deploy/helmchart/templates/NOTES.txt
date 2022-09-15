@@ -1,0 +1,5 @@
+goblue Service:
+
+Finished installing/updating {{ .Release.Name }} version {{ .Chart.AppVersion }}
+
+This chart is using image: {{ .Values.image }}:{{ .Chart.AppVersion }}
